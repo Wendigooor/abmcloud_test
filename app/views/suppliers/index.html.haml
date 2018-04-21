@@ -1,0 +1,24 @@
+%h1 Suppliers List
+
+= form_tag suppliers_path, multipart: true do
+  = file_field_tag :file
+  = submit_tag 'Import', class: 'btn btn-sm btn-primary'
+
+%hr/
+
+%h2
+  Total count:
+  = @suppliers.total_count
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Code
+      %th Name
+  %tbody
+    - @suppliers.each do |supplier|
+      %tr
+        %th= supplier.code
+        %th= supplier.name
+
+= paginate @suppliers

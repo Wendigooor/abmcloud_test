@@ -1,0 +1,38 @@
+%h1 Products List
+
+= form_tag products_path, multipart: true do
+  = file_field_tag :file
+  = submit_tag 'Import', class: 'btn btn-sm btn-primary'
+
+%hr/
+
+%h2
+  Total count:
+  = @products.total_count
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th SKU
+      %th Name
+      %th Supplier
+      %th Price
+      %th Attr 1
+      %th Attr 2
+      %th Attr 3
+      %th Attr 4
+      %th Attr 5
+  %tbody
+    - @products.each do |product|
+      %tr
+        %th= product.sku
+        %th= product.name
+        %th= product.supplier.name
+        %th= product.price
+        %th= product.attr_1
+        %th= product.attr_2
+        %th= product.attr_3
+        %th= product.attr_4
+        %th= product.attr_5
+
+= paginate @products

@@ -5,7 +5,12 @@ class SuppliersController < ApplicationController
   end
 
   def create
-    ImportSuppliersJob.perform_later(params[:file].path)
+    if params[:file].present?
+      ImportSuppliersJob.perform_later(params[:file].path)
+      flash[:notice] = 'Import was successfully started'
+    else
+      flash[:alert] = 'File not presented!'
+    end
     redirect_to suppliers_path
   end
 

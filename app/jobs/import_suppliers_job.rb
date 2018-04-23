@@ -6,7 +6,10 @@ class ImportSuppliersJob < ApplicationJob
   def perform(path)
     options = {
       validate: false,
-      on_duplicate_key_update: [:code]
+      on_duplicate_key_update: {
+        conflict_target: [:code],
+        columns: [:name]
+      }
     }
 
     items = []

@@ -8,7 +8,12 @@ class ProductsController < ApplicationController
   end
 
   def create
-    ImportProductsJob.perform_later(params[:file].path)
+    if params[:file].present?
+      ImportProductsJob.perform_later(params[:file].path)
+      flash[:notice] = 'Import was successfully started'
+    else
+      flash[:alert] = 'File not presented!'
+    end
     redirect_to products_path
   end
 

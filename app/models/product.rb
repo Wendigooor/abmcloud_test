@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  belongs_to :supplier, primary_key: :code, foreign_key: :supplier_code
+  belongs_to :supplier, primary_key: :code, foreign_key: :supplier_code, optional: true
 
   validates :sku, uniqueness: true
 
